@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "404: Page Not Found — AI Filmmaking Studio",
+  title: "404: Page Not Found | AI Filmmaking Studio",
   description: "The requested page could not be found. Return to AI Filmmaking Studio home.",
   path: "/404",
 });
@@ -28,10 +28,10 @@ export default function NotFound() {
           Return to Home
         </Link>
         <Link
-          href="/blog"
+          href="/guide"
           className="rounded-lg border border-dark-surface px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-accent/40"
         >
-          Browse Articles
+          Browse Guides
         </Link>
       </div>
     </div>

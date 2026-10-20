@@ -49,7 +49,7 @@ app/
   refund/page.tsx  terms/page.tsx  privacy/page.tsx
   sitemap.ts  robots.ts
 components/
-  Hero, Showreel, StudentShowcase, Curriculum, ToolsCovered,
+  Hero, Showreel, StudentShowcase, StudentReviews, SuccessStories, Curriculum, ToolsCovered,
   WhoIsItFor, Instructor, Pricing, FAQ, StickyCTA, EmailCapture,
   CheckoutButton, JsonLd
 content/blog/*.mdx
@@ -101,17 +101,30 @@ Keyword data (keyword tools, Oct 2026): "ai filmmaking course" ~170 searches/mon
 - Mobile first. **Sticky CTA bar on mobile.** One primary action per screen.
 - Landing page section order:
   1. Hero (H1, subhead "10+ hours, 9 AI tools, one finished movie. No camera, no crew.", CTA, showreel)
-  2. Showreel + student showcase
-  3. What you'll build (the 1-hour AI movie)
-  4. Curriculum (8 modules, one-line outcome each)
-  5. Tools covered (text list, no logos) + minimum stack
-  6. Who it's for / not for
-  7. Instructor
-  8. Pricing (tiers, bonuses, refund guarantee)
-  9. FAQ
-  10. Final CTA + email capture
+  2. Student demos (thumbnail strip, click to play)
+  3. What you'll get (3 short bullets: the 1-hour movie, the workflow, the tools)
+  4. Curriculum (8 modules, collapsed accordion, one-line outcome each)
+  5. Tools covered (one line of names) + short minimum-stack note
+  6. Student reviews
+  7. Student success stories
+  8. Instructor
+  9. Who it's for / not for (3 bullets per column)
+  10. Pricing ($79 one-time, bonuses, refund guarantee only if refund period is set in config)
+  11. FAQ
+  12. Final CTA + email capture
+- Sections 2, 6 and 7 render nothing if they have no approved entries (see section 7b).
 - Showreel: use a YouTube lite-embed, or a compressed local file. Cloudflare Pages has a per-file size limit (about 25 MiB; verify the current limit). Never commit large videos.
-- CTA copy example: `Get Founding Price: $49`. CTAs open the LS checkout overlay.
+- CTA copy example: `Get AI Filmmaking Pro: $79`. CTAs open the LS checkout overlay.
+
+## 7b. Social proof sections (student demos, reviews, success stories)
+
+All three are driven by arrays in `lib/config.ts` and **render nothing when empty or when no entry is approved.** No placeholders in production (placeholders only when `NEXT_PUBLIC_SHOW_PLACEHOLDERS=true` in dev).
+
+- **Student demos** (`studentDemos[]`): `{ studentName, channelHandle, videoUrl, thumbnail, permission }`. Thumbnail strip on the landing page (YouTube lite-embed, click to play); full grid on `/showcase`. Render only entries with `permission: true`.
+- **Student reviews** (`studentReviews[]`): `{ name, text, videoUrl?, source, permission, date }`. Real, unedited quotes (trim for length only, never change meaning). Show the student's name/handle. Never add star ratings the student did not give.
+- **Success stories** (`successStories[]`): `{ name, channelHandle, summary, whatTheyBuilt, factsVerified, permission }`. Describe what the student actually made (films, channel launch) using facts the owner has verified. Do not state income, subscriber or view numbers unless they are verified, current, and labeled as that student's individual result. No "you will earn" language.
+- Skip any entry with `permission: false`, `factsVerified: false`, or missing fields.
+- Do not add `Review` or `AggregateRating` structured data.
 
 ## 8. Course data (source of truth, keep in `lib/config.ts`)
 
@@ -127,7 +140,7 @@ Keyword data (keyword tools, Oct 2026): "ai filmmaking course" ~170 searches/mon
   7. Editing
   8. Earn from YouTube
 - **Tools covered:** Claude, Higgsfield, LTX Studio, Meliés (**owner to confirm spelling**), Runway, Kling AI, Seedance, ElevenLabs, Suno
-- **Pricing:** Founding price **$49 for the first 20 buyers**. Later tiers are placeholders (suggested $79 for the next 30, then $99-$129) and **must be confirmed by the owner** before launch. Seats sold is a manual number in `config.ts` that the owner updates.
+- **Pricing:** **$79 one-time payment, single fixed price** (USD). No tiers, no seat limit, no countdown. Keep `price: 79` in `config.ts`. Do not show any "founding price", "limited seats", "X remaining" or "price increases" messaging.
 - **Bonuses (suggested, owner to confirm):** prompt library, script/Claude prompt pack, character and location sheet templates, 1-hour movie shot-list template, lifetime updates.
 
 ### Starter blog posts (v1)
@@ -166,8 +179,8 @@ cover: ""
 
 ## 10. Compliance and honesty rules (hard rules)
 
-- **No fake testimonials, reviews, enrollment counts, or student numbers.** Until real reviews exist, rely on the showreel, student showcase and a free preview lesson.
-- **No fake scarcity.** The "first 20" founding price is real only if the price actually rises after seat 20. Show the tiers honestly and keep the seat counter accurate.
+- **No fake testimonials, reviews, enrollment counts, or student numbers.** Reviews and success stories must be real, written by the student, and published with the student's permission (a saved chat message or email is enough; keep the record outside the repo). Never write a review on a student's behalf. If a student is rewarded for a review, disclose it on the page. Until real reviews exist, rely on the showreel, student demos and a free preview lesson.
+- **No fake scarcity.** The price is a fixed $79. No countdown timers, "limited seats", "X remaining" or "price increases soon" messaging unless the owner introduces a real, verifiable change.
 - **No income claims.** Do not promise or imply earnings (including in module 8 copy, "Earn from YouTube"). Describe it as learning to publish and monetize within YouTube's current policies.
 - **Student showcase only with the student's permission.** Show only stats that are real and visible on the channel. Student channels the owner listed: @ReelixBox, @StellarCinema-z6v, @SonyHidayatAIFilms, @karmaaifilms, @Crepel_Studio, @WhenCrownsBleed. Specific best-video links still needed from the owner.
 - Be upfront that tool subscriptions/credits are separate and may cost extra; show a "minimum stack". Do not state tool prices unless verified.
@@ -191,11 +204,12 @@ Free Claude-powered tool, newsletter system, more cluster posts beyond the start
 
 - [ ] 3-5 specific best video links (showreel)
 - [ ] Lemon Squeezy checkout URL
-- [ ] Final bonuses list and price tiers after the first 20
+- [ ] Final bonuses list (price is fixed at $79 one-time)
 - [ ] Confirm "Meliés" spelling and final tool list
 - [ ] Refund period (7-14 days suggested)
 - [ ] Author photo, bio, and real credentials for `/about`
-- [ ] Student permissions for the showcase
+- [ ] Student permissions for the demos, reviews and success stories (3-5 reviews minimum before launch if possible)
+- [ ] Verified facts for each success story
 - [ ] Email provider choice
 - [ ] DNS email records (SPF, DKIM, DMARC) for the `.site` domain so receipts and emails are not marked as spam
 - [ ] Google Search Console and Bing Webmaster verification

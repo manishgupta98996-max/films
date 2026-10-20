@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes = [
     { path: "/", changeFrequency: "weekly" as const, priority: 1, lastModified: now },
-    { path: "/blog", changeFrequency: "weekly" as const, priority: 0.8, lastModified: now },
+    { path: "/guide", changeFrequency: "weekly" as const, priority: 0.8, lastModified: now },
     { path: "/about", changeFrequency: "monthly" as const, priority: 0.7, lastModified: now },
     { path: "/showcase", changeFrequency: "monthly" as const, priority: 0.7, lastModified: now },
     { path: "/templates", changeFrequency: "monthly" as const, priority: 0.7, lastModified: now },
@@ -28,12 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority,
   }));
 
-  const blogPosts = getAllPosts().map((post) => ({
-    url: `${SITE_URL}/blog/${post.slug}`,
+  const guidePosts = getAllPosts().map((post) => ({
+    url: `${SITE_URL}/guide/${post.slug}`,
     lastModified: new Date(post.updated || post.date),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...blogPosts];
+  return [...staticRoutes, ...guidePosts];
 }

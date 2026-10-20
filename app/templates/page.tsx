@@ -5,7 +5,7 @@ import CheckoutButton from "@/components/CheckoutButton";
 import { COURSE_TITLE, getActiveTier } from "@/lib/config";
 
 export const metadata = buildMetadata({
-  title: "Free AI Filmmaking Resources & Templates — AI Filmmaking Studio",
+  title: "Free AI Filmmaking Resources & Templates | AI Filmmaking Studio",
   description:
     "Download free AI filmmaking resources: 1-hour movie shot-list templates, Claude screenwriting prompt packs, character model sheets, and camera movement guides.",
   path: "/templates",
@@ -113,7 +113,7 @@ export default function TemplatesPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <CheckoutButton
-              label={`Join Founding Cohort: $${activeTier.price}`}
+              label={`Get AI Filmmaking Pro: $${activeTier.price}`}
               className="w-full sm:w-auto px-8 py-3.5 text-base font-bold"
             />
             <Link

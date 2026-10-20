@@ -1,73 +1,65 @@
 export default function WhoIsItFor() {
   const forWho = [
     {
-      title: "Solo Filmmakers & Visionaries",
-      desc: "Creators who have cinematic stories in mind but lack access to Hollywood film crews, soundstages, or six-figure equipment budgets.",
+      title: "You have a story you want to tell",
+      desc: "And you're tired of not having the tools or team to tell it.",
     },
     {
-      title: "Screenwriters & Authors",
-      desc: "Writers who want to transform scripts, novels, or treatments into full audio-visual films rather than waiting years for greenlights.",
+      title: "You're a YouTube creator who wants longer content",
+      desc: "Short clips don't hold watch time. Films do.",
     },
     {
-      title: "YouTubers & Video Creators",
-      desc: "Channel owners looking to transition from short talking-head clips into high-retention cinematic narrative films and episodic series.",
-    },
-    {
-      title: "Digital Artists & Animators",
-      desc: "Creative professionals wanting to integrate modern generative video models, consistent character sheets, and AI scoring into their workflows.",
+      title: "You're willing to actually finish something",
+      desc: "The pipeline works. You have to follow it.",
     },
   ];
 
   const notForWho = [
     {
-      title: "Get-Rich-Quick Seekers",
-      desc: "This is not a push-button automation scheme or low-effort content farm tactic. Filmmaking requires deliberate vision, editing, and story structure.",
+      title: "You want a passive income shortcut",
+      desc: "This is filmmaking. It takes creative work.",
     },
     {
-      title: "Those Who Refuse to Edit",
-      desc: "AI produces raw video clips and stems. You must assemble, time, color grade, and sound-mix the clips in an NLE to build a watchable film.",
+      title: "You're looking for a content automation tool",
+      desc: "We're making films, not bulk-scheduling posts.",
     },
     {
-      title: "Expectations of Zero-Effort Output",
-      desc: "AI is your digital camera crew and orchestra. You are the director. You must still make aesthetic choices, curate takes, and iterate.",
+      title: "You expect the AI to do everything",
+      desc: "You're the director. The AI is your crew.",
     },
   ];
 
   return (
-    <section className="bg-light-bg text-light-text py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-b border-light-muted/20">
+    <section className="bg-white py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-b border-neutral-200/80">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-amber-700 mb-2 block">
-            Audience Fit
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-light-text mb-4">
-            Who This Course Is For — And Who It Is Not For
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          {/* CHANGE 14 - "Who it's for" section heading */}
+          <h2 className="text-3xl sm:text-5xl font-black text-neutral-950 tracking-tight leading-tight [text-wrap:balance]">
+            This course is for you if you&apos;re done making clips.
           </h2>
-          <p className="text-base text-light-muted">
-            We value your time. AI filmmaking requires genuine creative curiosity and willingness to practice.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Who It's For */}
-          <div className="rounded-2xl border border-emerald-500/30 bg-light-surface p-6 sm:p-8 shadow-sm">
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-light-muted/15">
-              <span className="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-700 font-bold flex items-center justify-center text-sm">
+          {/* YES column */}
+          <div className="rounded-3xl border border-emerald-200 bg-[#F0FDF4] p-6 sm:p-8 shadow-xs">
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-emerald-200">
+              <span className="w-8 h-8 rounded-full bg-emerald-600 text-white font-black flex items-center justify-center text-sm shadow-xs">
                 ✓
               </span>
-              <h3 className="text-lg sm:text-xl font-bold text-light-text">
-                This Course Is For You If:
+              {/* CHANGE 14 - YES column heading */}
+              <h3 className="text-lg sm:text-xl font-bold text-emerald-950">
+                You&apos;re the right fit if:
               </h3>
             </div>
-            <ul className="space-y-4">
+            <ul className="space-y-6">
               {forWho.map((item) => (
                 <li key={item.title} className="flex items-start gap-3">
-                  <span className="text-emerald-600 font-bold mt-0.5">•</span>
+                  <span className="text-emerald-700 font-bold text-lg mt-0.5">✓</span>
                   <div>
-                    <h4 className="text-sm font-bold text-light-text">
+                    <h4 className="text-base font-bold text-neutral-900">
                       {item.title}
                     </h4>
-                    <p className="text-xs sm:text-sm text-light-muted mt-0.5 leading-relaxed">
+                    <p className="text-sm sm:text-base text-neutral-700 mt-0.5 leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
@@ -76,25 +68,26 @@ export default function WhoIsItFor() {
             </ul>
           </div>
 
-          {/* Who It's Not For */}
-          <div className="rounded-2xl border border-rose-500/30 bg-light-surface p-6 sm:p-8 shadow-sm">
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-light-muted/15">
-              <span className="w-8 h-8 rounded-full bg-rose-500/10 text-rose-700 font-bold flex items-center justify-center text-sm">
+          {/* NO column */}
+          <div className="rounded-3xl border border-rose-200 bg-[#FFF1F2] p-6 sm:p-8 shadow-xs">
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-rose-200">
+              <span className="w-8 h-8 rounded-full bg-rose-600 text-white font-black flex items-center justify-center text-sm shadow-xs">
                 ✕
               </span>
-              <h3 className="text-lg sm:text-xl font-bold text-light-text">
-                This Course Is NOT For You If:
+              {/* CHANGE 14 - NO column heading */}
+              <h3 className="text-lg sm:text-xl font-bold text-rose-950">
+                This isn&apos;t for you if:
               </h3>
             </div>
-            <ul className="space-y-4">
+            <ul className="space-y-6">
               {notForWho.map((item) => (
                 <li key={item.title} className="flex items-start gap-3">
-                  <span className="text-rose-600 font-bold mt-0.5">•</span>
+                  <span className="text-rose-700 font-bold text-lg mt-0.5">✕</span>
                   <div>
-                    <h4 className="text-sm font-bold text-light-text">
+                    <h4 className="text-base font-bold text-neutral-900">
                       {item.title}
                     </h4>
-                    <p className="text-xs sm:text-sm text-light-muted mt-0.5 leading-relaxed">
+                    <p className="text-sm sm:text-base text-neutral-700 mt-0.5 leading-relaxed">
                       {item.desc}
                     </p>
                   </div>

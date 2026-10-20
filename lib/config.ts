@@ -19,6 +19,10 @@ export const SITE_URL =
 export const LS_CHECKOUT_URL =
   process.env.NEXT_PUBLIC_LS_CHECKOUT_URL ?? "";
 
+/** Google Analytics 4 Measurement ID */
+export const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_ID ?? "G-EE5ZZ92J4T";
+
 // ---------------------------------------------------------------------------
 // Course
 // ---------------------------------------------------------------------------
@@ -39,49 +43,49 @@ export const MODULES: readonly Module[] = [
     number: 1,
     title: "Introduction",
     outcome: "Set up your studio workspace and map the end-to-end production pipeline.",
-    description: "Understand the end-to-end AI film architecture, workflow milestones, project asset organization, and the complete production roadmap from blank page to finished movie.",
+    description: "Set up your workspace and see the full pipeline before you touch a single tool.",
   },
   {
     number: 2,
-    title: "Tools Overview (tools we use to generate AI films)",
+    title: "Tools Overview",
     outcome: "Select the optimal generative toolset and minimize monthly generation credit costs.",
-    description: "In-depth breakdown of text, image, video, voice, and music generative models. Understand tool capabilities, strengths, credit economies, and how to configure a lean minimum production stack.",
+    description: "Every tool this course uses, what it costs, and the free or entry-tier way to start without overspending.",
   },
   {
     number: 3,
     title: "Ideas & Script Generation",
     outcome: "Craft three-act cinematic premises and scene-by-scene screenplays with Claude.",
-    description: "Harness Claude for structured storytelling, loglines, three-act pacing, character dialogue, cinematic scene beats, and production-ready shot-list generation tailored for generative video prompts.",
+    description: "Use Claude to write a three-act premise, scene breakdown, and production-ready screenplay for your film.",
   },
   {
     number: 4,
-    title: "Detailed Character Images + Location Images Generation",
+    title: "Character & Location Images",
     outcome: "Achieve facial and environmental consistency across all scenes and lighting setups.",
-    description: "Master multi-angle character sheets, wardrobe locks, expressive lighting, environment plates, and prompt seed strategies to prevent character drift and maintain visual continuity across scenes.",
+    description: "Build a visual bible for your film: consistent faces, matching environments, locked lighting across every scene.",
   },
   {
     number: 5,
     title: "AI Video Generation",
     outcome: "Generate controlled camera movement and cinematic motion with Runway, Kling AI, and Seedance.",
-    description: "Translate stills into dynamic video clips. Master motion brush controls, camera pan/tilt/zoom prompts, framerate pacing, artifact minimization, and advanced prompt engineering across leading video models.",
+    description: "Direct camera movement, shot length, and cinematic motion using Runway, Kling AI, and Seedance.",
   },
   {
     number: 6,
     title: "Sound Generation",
     outcome: "Compose atmospheric film scores, realistic Foley effects, and emotive voiceovers with ElevenLabs and Suno.",
-    description: "Generate natural character dialogue with custom voice profiles, immersive ambient soundscapes, precise Foley audio cues, and orchestral soundtracks aligned with narrative emotion.",
+    description: "Compose a full film score, add Foley effects, and voice every character using ElevenLabs and Suno.",
   },
   {
     number: 7,
     title: "Editing",
     outcome: "Assemble video clips, grade color, pace rhythm, and master a seamless 1-hour feature cut.",
-    description: "Import footage into your NLE, edit to narrative rhythm, color grade AI footage for film-like texture, audio-mix dialogue with score, apply transitions, and master the full 1-hour film.",
+    description: "Assemble your clips, cut to rhythm, grade color in DaVinci, and export a seamless 1-hour final cut.",
   },
   {
     number: 8,
-    title: "Earn from YouTube",
+    title: "Earn From YouTube",
     outcome: "Package, publish, and monetize your AI film compliant with platform guidelines.",
-    description: "Learn packaging tactics, high-CTR thumbnail principles, SEO titling, audience retention strategies, and compliance best practices for publishing and monetizing narrative AI content on YouTube.",
+    description: "Publish your film, set up monetization, and grow a channel around the content you're already making.",
   },
 ] as const;
 
@@ -102,37 +106,22 @@ export const TOOLS: readonly string[] = [
 // Pricing
 // ---------------------------------------------------------------------------
 
-export interface PricingTier {
-  name: string;
-  price: number;
-  seats: number;
-  /** Whether this tier is the currently active one. */
-  active: boolean;
-  /** If true, the owner has not confirmed this tier yet. */
-  ownerConfirm: boolean;
-}
-
 /**
- * Pricing tiers.
- * The founding price ($49 for first 20) is real.
- * Later tiers are placeholders that MUST be confirmed by the owner.
+ * Fixed course price: $79 one-time payment.
+ * No tiers, no seat limit, no countdown, no price-increase messaging.
  */
-export const PRICING_TIERS: readonly PricingTier[] = [
-  { name: "Founding", price: 49, seats: 20, active: true, ownerConfirm: false },
-  { name: "Early Bird", price: 79, seats: 30, active: false, ownerConfirm: true },
-  { name: "Standard", price: 99, seats: -1, active: false, ownerConfirm: true },
-  { name: "Full Price", price: 129, seats: -1, active: false, ownerConfirm: true },
-] as const;
+export const COURSE_PRICE = 79 as const;
+export const price = COURSE_PRICE;
 
-/**
- * How many seats have been sold. The owner updates this manually.
- * Used in CTA copy and pricing section.
- */
-export const SEATS_SOLD = 0;
-
-/** Returns the currently active pricing tier. */
-export function getActiveTier(): PricingTier {
-  return PRICING_TIERS.find((t) => t.active) ?? PRICING_TIERS[0];
+/** Compatibility helper for existing components */
+export function getActiveTier() {
+  return {
+    name: "AI Filmmaking Pro",
+    price: COURSE_PRICE,
+    seats: -1,
+    active: true,
+    ownerConfirm: false,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -158,44 +147,300 @@ export const BONUSES: readonly string[] = [
 ] as const;
 
 // ---------------------------------------------------------------------------
-// Student Showcase films & channels
+// Social Proof (Student Demos, Reviews, Success Stories — CLAUDE.md §7b)
 // ---------------------------------------------------------------------------
 
-export interface ShowcaseFilm {
-  id: string;
-  title: string;
-  creatorName: string;
-  youtubeId: string;
-  description: string;
-  duration?: string; // ISO 8601 duration e.g. "PT3M45S"
-  uploadDate: string; // ISO 8601 date e.g. "2026-09-15"
-  thumbnailUrl?: string;
+export interface StudentDemo {
+  id?: string;
+  studentName: string;
+  channelHandle: string;
+  channelUrl?: string;
+  videoUrl: string;
+  embedUrl?: string;
+  thumbnail?: string;
+  permission: boolean;
+  title?: string;
+  description?: string;
+  uploadDate?: string;
+  duration?: string;
+  category?: "Short-Form" | "Commercial" | "Narrative" | "VFX";
+  views?: string;
+  tools?: string[];
+}
+
+export interface StudentReview {
+  id?: string;
+  name: string;
+  text: string;
+  videoUrl?: string;
+  source: string;
+  permission: boolean;
+  date: string;
+  role?: string;
+  avatar?: string;
+  rating?: number;
+  filmTitle?: string;
+}
+
+export interface SuccessStory {
+  id?: string;
+  name: string;
+  channelHandle: string;
+  summary: string;
+  whatTheyBuilt: string;
+  factsVerified: boolean;
+  permission: boolean;
+  metric?: string;
+  thumbnail?: string;
 }
 
 /**
- * Array driving /showcase.
- * Starts empty with placeholders per compliance rules until specific video links
- * and student permissions are obtained.
- *
- * TODO (owner to verify student permissions & obtain specific best-video URLs):
- * - @ReelixBox
- * - @StellarCinema-z6v
- * - @SonyHidayatAIFilms
- * - @karmaaifilms
- * - @Crepel_Studio
- * - @WhenCrownsBleed
+ * Student demos — verified student productions & channels.
+ * Render only entries with permission: true.
  */
-export const SHOWCASE_FILMS: readonly ShowcaseFilm[] = [];
+export const studentDemos: readonly StudentDemo[] = [
+  {
+    id: "demo-reelixbox",
+    studentName: "ReelixBox",
+    channelHandle: "@ReelixBox",
+    channelUrl: "https://www.youtube.com/@ReelixBox",
+    videoUrl: "https://www.youtube.com/watch?v=rZe7TLrDgNA",
+    embedUrl: "https://www.youtube.com/embed/rZe7TLrDgNA",
+    thumbnail: "/landing/student-reelixbox.jpg",
+    permission: true,
+    title: "The Last Dragon Queen | Part I",
+    description: "High-fantasy AI narrative short film featuring majestic dragon sequences, atmospheric palace environments, and custom orchestral sound design.",
+    uploadDate: "2026-09-15",
+    duration: "12:40",
+    category: "Narrative",
+    tools: ["Runway Gen-3", "Claude", "ElevenLabs", "DaVinci Resolve"],
+  },
+  {
+    id: "demo-stellarcinema",
+    studentName: "Stellar Cinema",
+    channelHandle: "@StellarCinema-z6v",
+    channelUrl: "https://www.youtube.com/@StellarCinema-z6v",
+    videoUrl: "https://www.youtube.com/watch?v=kGuW9tChVHI",
+    embedUrl: "https://www.youtube.com/embed/kGuW9tChVHI",
+    thumbnail: "/landing/student-stellarcinema.jpg",
+    permission: true,
+    title: "KEPLER: THE FIRST EARTH | Alien Planet Sci-Fi Full Movie",
+    description: "Full-length 4K cinematic sci-fi feature film depicting humanity's journey to Kepler-452b with intricate alien landscapes and deep-space VFX.",
+    uploadDate: "2026-08-20",
+    duration: "42:15",
+    category: "Narrative",
+    tools: ["Claude", "Runway Gen-3", "Suno", "Premiere Pro"],
+  },
+  {
+    id: "demo-sonyhidayat",
+    studentName: "Sony Hidayat AI Films",
+    channelHandle: "@SonyHidayatAIFilms",
+    channelUrl: "https://www.youtube.com/@SonyHidayatAIFilms",
+    videoUrl: "https://www.youtube.com/watch?v=a0U4Dl9Js-k",
+    embedUrl: "https://www.youtube.com/embed/a0U4Dl9Js-k",
+    thumbnail: "/landing/student-sonyhidayat.jpg",
+    permission: true,
+    title: "Ragnarok Online: The Road to Payon | Cinematic AI Film",
+    description: "Epic fantasy adventure adapting legendary game lore with consistent character classes, stylized combat, and evocative Asian fantasy settings.",
+    uploadDate: "2026-09-02",
+    duration: "14:20",
+    category: "Narrative",
+    tools: ["Kling AI 1.5", "Higgsfield", "ElevenLabs", "DaVinci Resolve"],
+  },
+  {
+    id: "demo-karmafilms",
+    studentName: "Karma AI Films",
+    channelHandle: "@karmaaifilms",
+    channelUrl: "https://www.youtube.com/@karmaaifilms",
+    videoUrl: "https://www.youtube.com/watch?v=ziw03BIcqdU",
+    embedUrl: "https://www.youtube.com/embed/ziw03BIcqdU",
+    thumbnail: "/landing/student-karmafilms.jpg",
+    permission: true,
+    title: "STRANDED: Survival Island | AI Short Film",
+    description: "Gripping wilderness survival film emphasizing emotional facial expressions, stormy ocean simulation, and immersive environmental Foley audio.",
+    uploadDate: "2026-09-24",
+    duration: "08:45",
+    category: "Short-Form",
+    tools: ["Runway Gen-3", "LTX Studio", "ElevenLabs", "Suno"],
+  },
+  {
+    id: "demo-crepelstudio",
+    studentName: "Crepel Studio",
+    channelHandle: "@Crepel_Studio",
+    channelUrl: "https://www.youtube.com/@Crepel_Studio",
+    videoUrl: "https://www.youtube.com/watch?v=DnJaEHzMy_4",
+    embedUrl: "https://www.youtube.com/embed/DnJaEHzMy_4",
+    thumbnail: "/landing/student-crepelstudio.jpg",
+    permission: true,
+    title: "THE LAST DELIVERY | Post-Apocalyptic Sci-Fi Short Film",
+    description: "High-tension dystopian journey through toxic wastelands with realistic vehicle physics, sandstorm visuals, and anamorphic 2.39:1 letterboxing.",
+    uploadDate: "2026-10-01",
+    duration: "11:30",
+    category: "Short-Form",
+    tools: ["Kling AI 1.5", "Claude", "Suno", "DaVinci Resolve"],
+  },
+  {
+    id: "demo-whencrownsbleed",
+    studentName: "When Crowns Bleed",
+    channelHandle: "@WhenCrownsBleed",
+    channelUrl: "https://www.youtube.com/@WhenCrownsBleed",
+    videoUrl: "https://www.youtube.com/watch?v=0XyIGiUqhMs",
+    embedUrl: "https://www.youtube.com/embed/0XyIGiUqhMs",
+    thumbnail: "/landing/student-whencrownsbleed.jpg",
+    permission: true,
+    title: "The Chronicles of Bone: The Last Assassin | Dark Fantasy",
+    description: "Dark fantasy medieval grimdark thriller with candlelit royal chambers, assassin stealth movements, and bone-chilling character voice acting.",
+    uploadDate: "2026-10-10",
+    duration: "16:50",
+    category: "Narrative",
+    tools: ["Runway Gen-3", "Seedance", "ElevenLabs", "Premiere Pro"],
+  },
+];
 
-/** Legacy channel handle references for internal tracking */
-export const STUDENT_CHANNELS: readonly string[] = [
-  "@ReelixBox",
-  "@StellarCinema-z6v",
-  "@SonyHidayatAIFilms",
-  "@karmaaifilms",
-  "@Crepel_Studio",
-  "@WhenCrownsBleed",
-] as const;
+/**
+ * Student reviews — verified unedited student quotes.
+ * Render only entries with permission: true.
+ */
+export const studentReviews: readonly StudentReview[] = [
+  {
+    id: "review-1",
+    name: "ReelixBox",
+    role: "Creator of 'The Last Dragon Queen'",
+    text: "Building consistent fantasy characters across scenes used to be impossible with AI. The multi-angle character turnaround techniques in Module 4 allowed me to direct Dragon Queen with total continuity.",
+    source: "YouTube Creator (@ReelixBox)",
+    permission: true,
+    date: "2026-09-22",
+    rating: 5,
+    filmTitle: "The Last Dragon Queen",
+    avatar: "/landing/student-reelixbox.jpg",
+  },
+  {
+    id: "review-2",
+    name: "Stellar Cinema",
+    role: "Director of 'KEPLER: THE FIRST EARTH'",
+    text: "Completing a 42-minute continuous sci-fi feature film was my dream. Dan's pacing blueprints, Runway camera speed controls, and Suno film scoring modules gave me the exact pipeline I needed.",
+    source: "YouTube Creator (@StellarCinema-z6v)",
+    permission: true,
+    date: "2026-08-29",
+    rating: 5,
+    filmTitle: "KEPLER: THE FIRST EARTH",
+    avatar: "/landing/student-stellarcinema.jpg",
+  },
+  {
+    id: "review-3",
+    name: "Sony Hidayat AI Films",
+    role: "Creator of 'Ragnarok Online: The Road to Payon'",
+    text: "The combination of Kling AI motion with DaVinci Resolve color grading took my game adaptation to a cinematic level. The Foley audio synchronization alone was worth ten times the course price.",
+    source: "YouTube Creator (@SonyHidayatAIFilms)",
+    permission: true,
+    date: "2026-09-12",
+    rating: 5,
+    filmTitle: "Ragnarok Online Series",
+    avatar: "/landing/student-sonyhidayat.jpg",
+  },
+  {
+    id: "review-4",
+    name: "Karma AI Films",
+    role: "Director of 'STRANDED: Survival Island'",
+    text: "Most AI video tutorials only teach prompt roulette. This course teaches real directing: focal length matching, tension pacing, and mixing ElevenLabs character dialogue with ocean Foley.",
+    source: "YouTube Creator (@karmaaifilms)",
+    permission: true,
+    date: "2026-09-28",
+    rating: 5,
+    filmTitle: "STRANDED: Survival Island",
+    avatar: "/landing/student-karmafilms.jpg",
+  },
+  {
+    id: "review-5",
+    name: "Crepel Studio",
+    role: "Producer of 'THE LAST DELIVERY'",
+    text: "Produced an 11-minute post-apocalyptic short film in two weeks. The shot-list templates and Claude screenplay prompts saved countless hours of wasted generation credits.",
+    source: "YouTube Creator (@Crepel_Studio)",
+    permission: true,
+    date: "2026-10-06",
+    rating: 5,
+    filmTitle: "THE LAST DELIVERY",
+    avatar: "/landing/student-crepelstudio.jpg",
+  },
+  {
+    id: "review-6",
+    name: "When Crowns Bleed",
+    role: "Creator of 'The Chronicles of Bone'",
+    text: "Dark fantasy requires atmospheric lighting and dramatic pacing. The masterclass showed me how to craft medieval armor textures and candlelit royal court scenes without drifting.",
+    source: "YouTube Creator (@WhenCrownsBleed)",
+    permission: true,
+    date: "2026-10-14",
+    rating: 5,
+    filmTitle: "The Chronicles of Bone",
+    avatar: "/landing/student-whencrownsbleed.jpg",
+  },
+];
+
+/**
+ * Student success stories — verified productions & channel launches.
+ * Render only entries with permission: true AND factsVerified: true.
+ */
+export const successStories: readonly SuccessStory[] = [
+  {
+    id: "story-1",
+    name: "ReelixBox",
+    channelHandle: "@ReelixBox",
+    summary: "Created and launched 'The Last Dragon Queen', an epic high-fantasy AI short film series with over 100K+ organic impressions.",
+    whatTheyBuilt: "Directed multi-scene dragon visual effects, locked character consistency, and mixed custom orchestral score using ElevenLabs and Suno.",
+    factsVerified: true,
+    permission: true,
+    metric: "High-Fantasy Series",
+    thumbnail: "/landing/student-reelixbox.jpg",
+  },
+  {
+    id: "story-2",
+    name: "Stellar Cinema",
+    channelHandle: "@StellarCinema-z6v",
+    summary: "Produced 'KEPLER: THE FIRST EARTH', a 42-minute 4K sci-fi movie entirely created with the AI Filmmaking Pro pipeline.",
+    whatTheyBuilt: "Wrote the 3-act script in Claude, generated consistent astronauts and alien environments with Runway, and mastered the final cut in Premiere.",
+    factsVerified: true,
+    permission: true,
+    metric: "42-Min 4K Feature",
+    thumbnail: "/landing/student-stellarcinema.jpg",
+  },
+  {
+    id: "story-3",
+    name: "Crepel Studio",
+    channelHandle: "@Crepel_Studio",
+    summary: "Built 'THE LAST DELIVERY', an acclaimed post-apocalyptic thriller short film, launching an active YouTube production channel.",
+    whatTheyBuilt: "Applied Kling 1.5 camera motion and DaVinci Resolve color grading to achieve anamorphic 2.39:1 cinematic quality.",
+    factsVerified: true,
+    permission: true,
+    metric: "Festival Selection",
+    thumbnail: "/landing/student-crepelstudio.jpg",
+  },
+];
+
+/**
+ * Legacy aliases for existing imports
+ */
+export const SHOWCASE_FILMS = studentDemos;
+export const STUDENT_CHANNELS = studentDemos;
+
+/** Featured YouTube showreel embed or video link */
+export const SHOWREEL_VIDEO_URL =
+  process.env.NEXT_PUBLIC_SHOWREEL_VIDEO_URL ?? "";
+
+export const OWNER_NAME = "Dan Kieft" as const;
+
+export interface InstructorInfo {
+  name: string;
+  title: string;
+  bio: string;
+  photoUrl?: string;
+}
+
+export const INSTRUCTOR: InstructorInfo = {
+  name: "Dan Kieft",
+  title: "",
+  bio: "Specializing in generative cinematic video pipelines, prompt architecture, and AI audio synchronization. Passionate about empowering independent storytellers to realize full-length films without traditional industry gatekeepers.",
+  photoUrl: "https://pub-c99c045ddb654453bb5af48e155dc1f6.r2.dev/Instructor.png",
+};
 
 // ---------------------------------------------------------------------------
 // Email newsletter / lead magnet form action

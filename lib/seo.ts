@@ -6,7 +6,7 @@
  */
 
 import type { Metadata } from "next";
-import { COURSE_TITLE, getActiveTier, SITE_NAME, SITE_URL, SOCIAL_LINKS } from "./config";
+import { COURSE_TITLE, COURSE_PRICE, SITE_NAME, SITE_URL, SOCIAL_LINKS } from "./config";
 
 // ---------------------------------------------------------------------------
 // Metadata builder
@@ -97,8 +97,6 @@ export function buildJsonLd(
  * Uses strictly real data from config.ts with zero fake reviews/ratings.
  */
 export function buildCourseJsonLd(): Record<string, unknown> {
-  const activeTier = getActiveTier();
-
   return {
     "@context": "https://schema.org",
     "@type": "Course",
@@ -113,7 +111,7 @@ export function buildCourseJsonLd(): Record<string, unknown> {
     offers: {
       "@type": "Offer",
       category: "Paid",
-      price: activeTier.price,
+      price: COURSE_PRICE,
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: SITE_URL,
@@ -162,6 +160,7 @@ export function buildArticleJsonLd({
     author: {
       "@type": "Person",
       name: author,
+      url: `${SITE_URL}/about`,
     },
     publisher: {
       "@type": "Organization",
@@ -169,6 +168,27 @@ export function buildArticleJsonLd({
       url: SITE_URL,
     },
     ...(imageUrl && { image: [imageUrl] }),
+  };
+}
+
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+/**
+ * BreadcrumbList JSON-LD helper.
+ */
+export function buildBreadcrumbJsonLd(items: BreadcrumbItem[]): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
   };
 }
 

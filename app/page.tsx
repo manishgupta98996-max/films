@@ -1,12 +1,14 @@
 import { buildMetadata, buildCourseJsonLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import Hero from "@/components/Hero";
-import Showreel from "@/components/Showreel";
-import WhatYoullBuild from "@/components/WhatYoullBuild";
+import PipelineOverview from "@/components/PipelineOverview";
 import Curriculum from "@/components/Curriculum";
 import ToolsCovered from "@/components/ToolsCovered";
-import WhoIsItFor from "@/components/WhoIsItFor";
+import AdvancedVFX from "@/components/AdvancedVFX";
+import StudentProjectsGrid from "@/components/StudentProjectsGrid";
+import StudentReviews from "@/components/StudentReviews";
 import Instructor from "@/components/Instructor";
+import WhoIsItFor from "@/components/WhoIsItFor";
 import Pricing from "@/components/Pricing";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
@@ -18,49 +20,55 @@ import StickyCTA from "@/components/StickyCTA";
  * Meta: AI Filmmaking Pro is a 10+ hour AI filmmaking course. Learn Claude, Runway, Kling, Seedance, ElevenLabs & more, and finish a full 1-hour AI movie.
  */
 export const metadata = buildMetadata({
-  title: "AI Filmmaking Course: Make a 1-Hour AI Movie",
+  title: "AI Filmmaking Course: No Camera, No Crew, No Experience Needed",
   description:
-    "AI Filmmaking Pro is a 10+ hour AI filmmaking course. Learn Claude, Runway, Kling, Seedance, ElevenLabs & more, and finish a full 1-hour AI movie.",
+    "The AI filmmaking course with real student films to prove it works. Script, visuals, voice, score and edit across a complete pipeline. 10+ hours, $79 one-time payment. 14-day refund.",
   path: "/",
 });
 
 export default function HomePage() {
   return (
     <>
-      {/* Course JSON-LD — uses only verified data from config */}
+      {/* Course JSON-LD - verified data from config */}
       <JsonLd data={buildCourseJsonLd()} />
 
-      <main className="min-h-screen pb-16 md:pb-0">
-        {/* 1. Hero */}
+      <div className="min-h-screen pb-16 md:pb-0 bg-[#FAF9F6]">
+        {/* 1. Hero (Changes 1 to 6) */}
         <Hero />
 
-        {/* 2. Showreel + student showcase */}
-        <Showreel />
+        {/* 2. CHANGE 8: 2-Part Section AFTER Hero and BEFORE Curriculum (Part A: Pain block, Part B: Dream block) */}
+        <PipelineOverview />
 
-        {/* 3. What you'll build (the 1-hour AI movie) */}
-        <WhatYoullBuild />
-
-        {/* 4. Curriculum (8 modules, one-line outcomes, accordion) */}
+        {/* 3. CHANGE 9 & 10: Curriculum (8 modules. The order a real filmmaker follows.) */}
         <Curriculum />
 
-        {/* 5. Tools covered + minimum stack */}
+        {/* 4. CHANGE 11: Tools bar below modules */}
         <ToolsCovered />
 
-        {/* 6. Who it's for / not for */}
-        <WhoIsItFor />
+        {/* 5. Advanced Cinematic & VFX (Single instance, maximum ONE) */}
+        <AdvancedVFX />
 
-        {/* 7. Instructor */}
+        {/* 6. CHANGE 13: Student Proof & Real Channels (Films made by people who took this course) */}
+        <StudentProjectsGrid />
+
+        {/* 7. Student Reviews */}
+        <StudentReviews />
+
+        {/* 8. CHANGE 12: Instructor Section (Your instructor: Dan Kieft) */}
         <Instructor />
 
-        {/* 8. Pricing (tiers, bonuses, refund guarantee) */}
+        {/* 9. CHANGE 14: Who It's For (This course is for you if you're done making clips) */}
+        <WhoIsItFor />
+
+        {/* 10. CHANGE 16: Buy / Pricing Section (Start your film this week) */}
         <Pricing />
 
-        {/* 9. FAQ */}
+        {/* 11. CHANGE 15: FAQ Section (6 exact Q&As) */}
         <FAQ />
 
-        {/* 10. Final CTA + email capture */}
+        {/* 12. Final CTA banner + lead magnet */}
         <FinalCTA />
-      </main>
+      </div>
 
       {/* Sticky mobile CTA bar */}
       <StickyCTA />
