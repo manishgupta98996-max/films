@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function ToolsCovered() {
   const toolsList = [
     "Claude",
@@ -32,6 +34,25 @@ export default function ToolsCovered() {
 
         <p className="text-sm sm:text-base text-neutral-600 max-w-2xl mx-auto leading-relaxed">
           Everything runs in the cloud. No GPU required. Tool subscriptions are billed separately by each platform, and you can start on free or entry tiers.
+        </p>
+
+        {/* Contextual Deep Dive Link Injection */}
+        <p className="text-xs sm:text-sm font-semibold text-neutral-500 pt-2">
+          Want deep-dive comparisons? Explore our in-depth{" "}
+          <Link
+            href="/guide/ai-filmmaking-tools"
+            className="text-[#D64700] hover:text-[#FF5B00] font-bold underline transition-colors"
+          >
+            AI Filmmaking Tools Guide
+          </Link>{" "}
+          and{" "}
+          <Link
+            href="/guide/curious-refuge-ai-filmmaking-course-review"
+            className="text-[#D64700] hover:text-[#FF5B00] font-bold underline transition-colors"
+          >
+            Curious Refuge Course Review
+          </Link>
+          .
         </p>
       </div>
     </section>

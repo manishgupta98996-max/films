@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { MODULES, COURSE_HOURS } from "@/lib/config";
+import Link from "next/link";
+import { MODULES } from "@/lib/config";
 
 export default function Curriculum() {
   const [openIndex, setOpenIndex] = useState<number | null>(0); // First module open by default for immediate context
@@ -81,6 +82,19 @@ export default function Curriculum() {
                       <span className="text-[#D64700]">✓ Production Deliverable:</span>
                       <span>Real scene assets integrated directly into your capstone movie project.</span>
                     </div>
+
+                    {(m.number === 3 || m.number === 4) && (
+                      <p className="mt-3 text-xs font-semibold text-neutral-500">
+                        Download the accompanying pre-production worksheets on our{" "}
+                        <Link
+                          href="/templates"
+                          className="text-[#D64700] hover:text-[#FF5B00] font-bold underline transition-colors"
+                        >
+                          Templates Page
+                        </Link>
+                        .
+                      </p>
+                    )}
                   </div>
                 )}
               </div>

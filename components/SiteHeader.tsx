@@ -17,7 +17,7 @@ export default function SiteHeader() {
           <span>{SITE_NAME}</span>
         </Link>
 
-        {/* Nav Links */}
+        {/* Desktop Nav Links: Standard Nav Order */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-bold text-neutral-700" aria-label="Main navigation">
           <Link
             href="/#curriculum"
@@ -26,22 +26,10 @@ export default function SiteHeader() {
             Curriculum
           </Link>
           <Link
-            href="/#showcase"
+            href="/showcase"
             className="hover:text-neutral-950 transition-colors"
           >
-            Student Work
-          </Link>
-          <Link
-            href="/#reviews"
-            className="hover:text-neutral-950 transition-colors"
-          >
-            Reviews
-          </Link>
-          <Link
-            href="/#pricing"
-            className="hover:text-neutral-950 transition-colors"
-          >
-            Pricing
+            Showcase
           </Link>
           <Link
             href="/guide"
@@ -49,13 +37,40 @@ export default function SiteHeader() {
           >
             Guides
           </Link>
+          <Link
+            href="/templates"
+            className="hover:text-neutral-950 transition-colors"
+          >
+            Templates
+          </Link>
+          <Link
+            href="/#reviews"
+            className="hover:text-neutral-950 transition-colors"
+          >
+            Reviews
+          </Link>
         </nav>
+
+        {/* Mobile Navigation Strip (Direct crawlable hub links) */}
+        <div className="flex md:hidden items-center gap-2.5 text-xs font-bold text-neutral-700">
+          <Link href="/guide" className="hover:text-neutral-950 transition-colors">
+            Guides
+          </Link>
+          <span className="text-neutral-300">·</span>
+          <Link href="/templates" className="hover:text-neutral-950 transition-colors">
+            Templates
+          </Link>
+          <span className="text-neutral-300">·</span>
+          <Link href="/showcase" className="hover:text-neutral-950 transition-colors">
+            Showcase
+          </Link>
+        </div>
 
         {/* Header CTA */}
         <div className="flex items-center gap-3">
           <CheckoutButton
             label={`Get Course: $${COURSE_PRICE}`}
-            className="py-2.5 px-4 text-xs sm:text-sm font-extrabold bg-[#FF5B00] hover:bg-[#E04E00] text-white rounded-xl shadow-md shadow-[#FF5B00]/20 transition-all hover:scale-105"
+            className="py-2.5 px-3 sm:px-4 text-xs sm:text-sm font-extrabold bg-[#FF5B00] hover:bg-[#E04E00] text-white rounded-xl shadow-md shadow-[#FF5B00]/20 transition-all hover:scale-105"
           />
         </div>
       </div>

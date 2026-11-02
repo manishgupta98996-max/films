@@ -18,6 +18,18 @@ export default function GuideIndexPage() {
 
   return (
     <div className="flex-1 flex flex-col bg-dark-bg text-dark-text">
+      {/* Top Resource Alert Bar (Internal Linking to Templates) */}
+      <div className="bg-[#FFF0E6] border-b border-[#FF5B00]/30 py-3 px-4 text-center text-xs sm:text-sm font-semibold text-neutral-800">
+        <span>Looking for production assets? Download our free </span>
+        <Link
+          href="/templates"
+          className="text-[#D64700] hover:text-[#FF5B00] font-black underline"
+        >
+          Production Shot-List &amp; Prompts on the Templates page
+        </Link>
+        <span>.</span>
+      </div>
+
       {/* Hero Header */}
       <header className="relative bg-gradient-to-b from-[#060A14] via-[#0A0F1E] to-[#0D1527] border-b border-dark-surface/60 py-16 sm:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -64,7 +76,7 @@ export default function GuideIndexPage() {
             </div>
           ) : (
             /* Published Guides Grid */
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               {posts.map((post, idx) => (
                 <article
                   key={post.slug}
@@ -151,8 +163,25 @@ export default function GuideIndexPage() {
             </div>
           )}
 
+          {/* Showcase Bridge: Contextual link below articles grid */}
+          <div className="rounded-2xl border border-neutral-200/90 bg-white p-6 sm:p-8 mb-12 text-center shadow-xs">
+            <h3 className="text-lg sm:text-xl font-bold text-zinc-900 mb-2">
+              See These Techniques in Action
+            </h3>
+            <p className="text-sm text-zinc-600 max-w-xl mx-auto mb-4">
+              Explore full-length sci-fi journeys, fantasy epics, and cinematic tests directed by creators using these exact workflows.
+            </p>
+            <Link
+              href="/showcase"
+              className="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-[#D64700] hover:text-[#FF5B00] underline"
+            >
+              <span>Watch real student films created with these production techniques</span>
+              <span>&rarr;</span>
+            </Link>
+          </div>
+
           {/* Bottom Masterclass Callout */}
-          <div className="mt-12 rounded-3xl border border-zinc-800 bg-zinc-950 text-white p-8 sm:p-12 text-center shadow-xl">
+          <div className="mt-8 rounded-3xl border border-zinc-800 bg-zinc-950 text-white p-8 sm:p-12 text-center shadow-xl">
             <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold mb-3 block">
               Step-by-Step Video Masterclass
             </span>
@@ -171,7 +200,7 @@ export default function GuideIndexPage() {
                 href="/"
                 className="text-xs sm:text-sm font-semibold text-zinc-300 hover:text-amber-400 underline transition-colors"
               >
-                Review Full Syllabus &rarr;
+                Enroll in the full AI Filmmaking Pro masterclass &rarr;
               </Link>
             </div>
           </div>

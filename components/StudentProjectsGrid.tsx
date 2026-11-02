@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { studentDemos } from "@/lib/config";
 
 export default function StudentProjectsGrid() {
@@ -154,6 +155,17 @@ export default function StudentProjectsGrid() {
         <p className="text-center text-sm sm:text-base font-semibold text-neutral-700 max-w-2xl mx-auto pt-2">
           Every film you see here was made without a camera, without a crew, and without any prior filmmaking experience.
         </p>
+
+        {/* Showcase Hub Contextual Link */}
+        <div className="text-center pt-4">
+          <Link
+            href="/showcase"
+            className="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-[#D64700] hover:text-[#FF5B00] underline transition-colors"
+          >
+            <span>Browse the complete catalog of student movies in our Official Creator Showcase</span>
+            <span>&rarr;</span>
+          </Link>
+        </div>
 
         {/* Video Player Modal */}
         {activeVideoId && (

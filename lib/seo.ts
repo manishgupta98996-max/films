@@ -32,7 +32,11 @@ export function buildMetadata({
   ogImage,
 }: PageMetaInput): Metadata {
   const url = `${SITE_URL}${path === "/" ? "" : path}`;
-  const imageUrl = ogImage ? `${SITE_URL}${ogImage}` : undefined;
+  const imageUrl = ogImage
+    ? ogImage.startsWith("http://") || ogImage.startsWith("https://")
+      ? ogImage
+      : `${SITE_URL}${ogImage}`
+    : undefined;
 
   return {
     title,

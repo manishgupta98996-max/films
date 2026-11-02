@@ -1,0 +1,471 @@
+---
+title: "Write a Feature Screenplay with Claude 3.5 (Full Prompts)"
+description: "Step-by-step framework to write a production-ready 3-act movie script with Claude 3.5 Sonnet, formatted specifically for AI video generators."
+slug: "writing-feature-film-scripts-claude-ai"
+date: "2026-11-02"
+updated: "2026-11-02"
+author: "Dan Kieft"
+category: "Pre-Production"
+primaryKeyword: "Claude 3.5 scriptwriting"
+cover: "https://pub-c99c045ddb654453bb5af48e155dc1f6.r2.dev/Writing%20Feature%20Film%20Scripts%20with%20Claude%203.5%20Sonnet.png"
+coverAlt: "Writing Feature Film Scripts with Claude 3.5 Sonnet"
+tags: ["Claude 3.5", "Screenwriting", "Script Generation", "Pre-Production"]
+draft: false
+takeaways:
+  - "Most AI screenplays fail because amateur creators ask for complete scripts in a single prompt, producing generic tropes and on-the-nose exposition."
+  - "Claude 3.5 Sonnet's 200,000-token context window and unmatched grasp of psychological subtext make it the premier LLM for narrative cinema."
+  - "The 4-stage screenwriting pipeline (Logline, 15-Beat Sheet, Scene Matrix, Scene Pages) maintains strict character continuity and thematic tension across 90 pages."
+  - "AI video generators require Visual Action Cues (VAC): traditional literary script prose must be translated into camera vectors, lighting setups, and motion physics."
+  - "Module 3 ('Ideas & Script Generation') in AI Filmmaking Pro provides our proprietary Claude 3.5 Prompt Stack and Notion Script-to-Screen engine."
+faq:
+  - q: "How do I stop Claude 3.5 from writing cheesy, melodramatic dialogue?"
+    a: "Never ask Claude to simply 'write a dialogue scene'. Instruct it with negative constraints: ban direct emotional declarations, forbid characters from saying what they mean, force physical displacement activities, and provide a Dialogue Subtext Matrix where every line conceals an unstated objective."
+  - q: "Can Claude 3.5 write a full 90-page feature script in a single prompt?"
+    a: "No, and you should never attempt it. A single prompt forces the model to compress narrative pacing into a shallow summary. The professional approach is batched scene generation: develop the 15-beat outline first, build the scene-by-scene beat breakdown, and generate scenes in tight 3-to-5 page sequences while maintaining full context."
+  - q: "Who owns the copyright to a movie script generated with Claude 3.5?"
+    a: "Under US Copyright Office guidance, raw synthetic text generated entirely by AI cannot be copyrighted. However, a human director who designs the narrative architecture, arranges the scene structure, iteratively directs dialogue revisions, and combines elements into an original compiled work owns full copyright over the finished creative expression."
+  - q: "How does an AI-targeted screenplay differ from a traditional Hollywood spec script?"
+    a: "Traditional spec scripts use literary metaphors and emotional abstraction ('He feels the weight of his forgotten years'). AI video models like Runway Gen-3 and Kling cannot parse emotional abstractions. An AI screenplay embeds Visual Action Cues (VAC) that translate emotional subtext into precise optical instructions: focal length, camera motion, key lighting, and physical body language."
+relatedSlugs:
+  - "how-to-make-a-1-hour-ai-film-for-youtube"
+  - "multi-agent-ai-filmmaking-workflow"
+  - "lock-character-consistency-ai-filmmaking"
+---
+
+> **Editorial Disclosure:** I direct synthetic feature cinema and teach script-to-screen production in [AI Filmmaking Pro](/). Every system prompt, beat-sheet framework, and visual action template in this masterclass has been battle-tested across multi-scene narrative productions. This guide contains zero sponsored placements.
+
+A film can survive mediocre camera resolution. It can survive imperfect rendering or stylized visual quirks. 
+
+**It cannot survive a terrible script.**
+
+In 2026, the internet is flooded with gorgeous, hyper-realistic AI video clips that nobody watches for more than eight seconds. Creators spend hundreds of dollars on compute generating photorealistic cyberpunk alleys, dystopian soldiers, and teary-eyed close-ups—only to edit them into a hollow sizzle reel masquerading as a movie.
+
+The reason is simple: **visual fidelity does not equal narrative immersion**. 
+
+When independent creators attempt to use artificial intelligence for screenwriting, they usually open ChatGPT, type *"Write a sci-fi thriller screenplay about a rogue detective in Neo-Tokyo,"* and hit enter. 
+
+The result is unwatchable garbage: generic tropes, plastic dialogue where characters narrate their feelings aloud, predictable plot points, and zero emotional stakes.
+
+To write a feature-length screenplay that commands 60 to 90 minutes of dedicated viewer attention on YouTube or streaming platforms, you need a disciplined, multi-stage development architecture. And you need the right generative engine.
+
+In this comprehensive masterclass, you will learn how to turn **Claude 3.5 Sonnet** into your personal, world-class screenwriting collaborator. We will explore why Claude outperforms other language models in narrative craft, walk through our **4-Stage Script Development Pipeline**, examine how to format scripts specifically for AI video diffusion engines, and provide **three copy-paste Master Prompts** you can deploy immediately.
+
+> 📚 **Recommended Companion Read:** If you plan to produce your script as a full-length movie, study our complete feature production roadmap: **[How to Make a 1-Hour AI Film for YouTube](/guide/how-to-make-a-1-hour-ai-film-for-youtube)**.
+
+---
+
+## 1. Why Most AI Screenplays Fail: The Anatomy of Synthetic Slop
+
+Before looking at how to generate great scripts, we must diagnose why 95% of AI-generated screenplays feel utterly lifeless.
+
+```
++--------------------------------------------------------------------------+
+|                  THE 4 DEADLY SINS OF AMATEUR AI WRITING                 |
+|                                                                          |
+|  1. ON-THE-NOSE EXPOSITION                                               |
+|     Characters say exactly what they feel and describe backstory aloud.  |
+|     Example: "I am bitter because my father died in the reactor blast."  |
+|                                                                          |
+|  2. THE HOMOGENIZED VOICE PROBLEM                                        |
+|     The grizzled veteran, the 8-year-old child, and the rogue AI all      |
+|     speak in the same grammatically balanced, polite cadence.            |
+|                                                                          |
+|  3. THE MIDPOINT COLLAPSE                                                |
+|     Without strict structural constraints, the story loops into aimless   |
+|     conversations with no escalating stakes or irreversible decisions.   |
+|                                                                          |
+|  4. THE LACK OF DRAMATIC SUBTEXT                                         |
+|     Every line operates on literal surface meaning. Real human cinema     |
+|     relies on what is left unsaid—the hidden tension beneath the words.  |
++--------------------------------------------------------------------------+
+```
+
+### The "As You Know, Bob" Trap
+Standard language models default to sycophantic clarity. They want the reader to understand everything instantly. In narrative screenwriting, this produces the dreaded *"As you know, Bob"* exposition:
+
+> *DR. ARLO: "As you know, Sarah, the dark matter containment grid has been decaying for three months, and if we do not find the crystalline core before midnight, Sector 4 will implode."*
+
+No human scientist speaks this way. Real human dialogue is fragmented, defensive, and weaponized. In cinema, characters speak to get something from each other, to hide their vulnerabilities, or to deflect pain—not to summarize the plot for the audience.
+
+### The Single-Prompt Fallacy
+The biggest mistake creators make is expecting an LLM to generate an entire 3-act narrative from a single prompt. 
+
+When you ask an AI model to write a full movie script at once, the model is forced to compress 90 minutes of dramatic progression into a 2,000-word summary. Pacing shatters. The inciting incident happens on page 2, the midpoint happens on page 4, and the climax arrives on page 8. 
+
+Professional screenwriting is not an act of spontaneous generation; it is an act of **iterative architectural design**.
+
+---
+
+## 2. Why Claude 3.5 Sonnet Is the Superior Screenwriting Engine
+
+While OpenAI's GPT-4o and DeepSeek-V3 are powerful tools for coding and general reasoning, **Anthropic's Claude 3.5 Sonnet** has emerged as the clear, undisputed favorite among professional screenwriters and AI directors.
+
+```
++-----------------------------------------------------------------------------+
+|               LLM SCREENWRITING BENCHMARK COMPARISON (2026)                |
++----------------------+--------------------+--------------------+------------+
+| METRIC               | CLAUDE 3.5 SONNET  | GPT-4o             | DEEPSEEK-V3|
++----------------------+--------------------+--------------------+------------+
+| Subtext Nuance       | ★★★★★ (Exceptional)| ★★★☆☆ (Literal)    | ★★★☆☆      |
+| Character Voice      | ★★★★★ (Distinct)   | ★★★☆☆ (Uniform)    | ★★★☆☆      |
+| Context Memory       | 200,000 tokens     | 128,000 tokens     | 128,000 tk |
+| Structural Adherence | ★★★★★ (Strict)     | ★★★★☆ (Fair)       | ★★★☆☆      |
+| Sarcasm & Irony      | ★★★★★ (Organic)    | ★★☆☆☆ (Forced)     | ★★★☆☆      |
+| Anti-Cliche Defense  | ★★★★☆ (High)       | ★★☆☆☆ (Low)        | ★★☆☆☆      |
++----------------------+--------------------+--------------------+------------+
+```
+
+### 1. 200K Context Window & Long-Range Needle Recall
+A feature screenplay runs roughly 90 to 110 pages in standard script format (approximately 20,000 to 25,000 words). When you factor in character bibles, world-building lore, and beat sheets, your total narrative project requires roughly 60,000 tokens of persistent working memory.
+
+Claude 3.5 Sonnet possesses an active context window of **200,000 tokens** with industry-leading retrieval accuracy. This means you can keep the entire world bible, the 15-beat structural outline, and 30 completed scenes in active memory simultaneously. When you write Scene 42 on page 70, Claude remembers the offhand remark your protagonist made in Scene 4 on page 8—enabling seamless foreshadowing, recurring motifs, and satisfying dramatic payoffs.
+
+### 2. Micro-Nuance and Linguistic Subtext
+Claude 3.5 has been calibrated with an extraordinary ear for prose rhythm, pauses, and indirect human speech. Where GPT-4o tends to write verbose, theatrical monologues, Claude excels at:
+- **Ellipses and pauses:** Knowing when a character hesitates or changes the subject.
+- **Weaponized silence:** Writing action beats where body language contradicts the spoken word.
+- **Vernacular authenticity:** Adapting to regional dialects, military jargon, or period-specific colloquialisms without sounding like a caricature.
+
+### 3. Resistance to Moralizing & Corporate Platitudes
+Standard LLMs frequently inject moralizing commentary or wrap every dark, psychological conflict into a neat, wholesome moral lesson. Claude 3.5 allows you to explore complex, morally gray characters—tragic antiheroes, sociopathic corporate executives, and deeply flawed protagonists—without constantly lecturing you about ethical values.
+
+---
+
+## 3. The 4-Stage Script Development Pipeline
+
+To produce an authentic, production-ready screenplay, you must never jump straight into writing dialogue. Follow this **4-Stage Pipeline** inside a dedicated Claude project:
+
+```
++--------------------------------------------------------------------------+
+|                  THE 4-STAGE SCRIPT DEVELOPMENT PIPELINE                 |
+|                                                                          |
+|  [STAGE 1] THE HIGH-CONCEPT LOGLINE & THEMATIC CORE                     |
+|            Define protagonist, wound, flaw, stakes, & philosophical idea |
+|                                 │                                        |
+|                                 ▼                                        |
+|  [STAGE 2] THE 15-BEAT BLAKE SNYDER BEAT SHEET                          |
+|            Establish macro structure, midpoint shift, & all-hope-is-lost |
+|                                 │                                        |
+|                                 ▼                                        |
+|  [STAGE 3] THE SCENE-BY-SCENE CHARACTER ARC MATRIX                      |
+|            40 to 60 distinct scenes mapped with conflict & objectives    |
+|                                 │                                        |
+|                                 ▼                                        |
+|  [STAGE 4] SCENE GENERATION IN BATCHES (WITH VAC TAGS)                  |
+|            Write 3 to 5 pages per prompt formatted for AI video tools   |
++--------------------------------------------------------------------------+
+```
+
+---
+
+### Stage 1: The High-Concept Logline & Dramatic Theme
+
+Every unforgettable movie is built on a single **thematic argument**. 
+
+Theme is not a genre; theme is a question about human existence. For example:
+- *The Godfather:* Can a good man protect his family without losing his soul?
+- *Whiplash:* Is greatness worth psychological self-destruction?
+- *Children of Men:* Can hope survive in a world without a future?
+
+Before generating plot beats, you must lock five core creative pillars in Claude:
+
+1. **The Protagonist's Internal Wound (The Lie):** The psychological scar from their past that causes them to view the world incorrectly.
+2. **The External Want:** The tangible, physical objective they are chasing (e.g., steal the diamond, find the cure, escape the colony).
+3. **The Internal Need:** The moral truth they must embrace to find peace, which usually requires sacrificing their external want.
+4. **The Antagonistic Force:** An opponent who is the thematic mirror of the protagonist, representing what happens if the protagonist embraces the Lie completely.
+5. **The Iron-Clad Logline:** A two-sentence summary following the formula: *When [INCITING INCIDENT OCCURS], a [FLAWED PROTAGONIST] must [PURSUE EXTERNAL GOAL] against [POWERFUL ANTAGONIST], or else [CATASTROPHIC STAKES].*
+
+---
+
+### Stage 2: The 15-Beat Blake Snyder "Save the Cat" Beat Sheet
+
+To ensure your screenplay maintains emotional momentum across a 60-to-90-minute runtime, map your narrative across the classical **15 Blake Snyder Beats**:
+
+| Beat Number | Beat Name | Feature % | Directorial Purpose |
+|:---|:---|:---|:---|
+| **01** | **Opening Image** | 0% – 1% | The "Before" snapshot. Establishes protagonist's flawed world and internal wound. |
+| **02** | **Theme Stated** | 5% | An offhand remark by a secondary character foreshadowing the story's moral lesson. |
+| **03** | **Set-Up** | 1% – 10% | Everyday life, behavioral flaws, the ticking clock, and the stakes of inaction. |
+| **04** | **Catalyst** | 10% | The Inciting Incident. The knock on the door that shatters the status quo forever. |
+| **05** | **Debate** | 10% – 20% | The hesitation. Why can't I just ignore this? The protagonist tests and fails easy exits. |
+| **06** | **Break into Two** | 20% | The threshold crossing. The protagonist makes an irreversible decision to enter Act II. |
+| **07** | **B Story** | 22% | Introduction of the relationship character (love interest, mentor, rival) who embodies the theme. |
+| **08** | **Fun and Games** | 20% – 50% | The "Promise of the Premise." The iconic poster moments and core set-pieces of the genre. |
+| **09** | **Midpoint** | 50% | The illusion of victory or defeat. Stakes are raised from personal survival to existential crisis. |
+| **10** | **Bad Guys Close In** | 50% – 75% | Internal doubts resurface; external enemies regroup; the pressure cooker intensifies. |
+| **11** | **All Is Lost** | 75% | The "Whiff of Death." The mentor dies, the plan collapses, and the external goal appears impossible. |
+| **12** | **Dark Night of the Soul**| 75% – 80% | The emotional nadir. The protagonist sits in darkness and confronts their internal flaw. |
+| **13** | **Break into Three** | 80% | The revelation. The protagonist synthesizes the theme (Need) to discover a radical new solution. |
+| **14** | **Finale** | 80% – 99% | The 5-point climax: high tower storming, execution of the new plan, and the ultimate sacrifice. |
+| **15** | **Final Image** | 100% | The "After" snapshot. A visual contrast to Beat 01 proving the protagonist has permanently changed. |
+
+By locking these 15 beats before writing dialogue, you eliminate writer's block and ensure every scene serves an indispensable structural function.
+
+---
+
+### Stage 3: The Scene Breakdown & Character Arc Matrix
+
+Next, expand the 15 macro-beats into a detailed **Scene-by-Scene Matrix** of approximately 45 to 60 individual scenes. 
+
+Every single scene must pass the **Screenwriting Conflict Test**:
+- Who enters the scene with the strongest objective?
+- What physical or emotional obstacle prevents them from getting it?
+- How does the emotional charge change from beginning to end (e.g., from *Confidence (+)* to *Betrayal (-)*)?
+- What is the irreversible consequence that propels the characters into the next scene?
+
+If a scene starts in harmony and ends in harmony, **cut it**. In cinema, scenes that only convey information without emotional conflict belong in the trash.
+
+---
+
+### Stage 4: Writing Scene Pages in Standard Screenplay Format
+
+Now that the structural blueprint is bulletproof, you prompt Claude to generate the actual scene pages. 
+
+Never ask Claude for more than **3 to 5 pages (roughly 2 to 3 scenes)** in a single prompt. This preserves maximum tokens for literary nuance, subtextual depth, and precise formatting.
+
+---
+
+## 4. The AI Video Specific Script Format: Visual Action Cues (VAC)
+
+Here is where traditional Hollywood screenwriting diverges radically from AI filmmaking.
+
+In a traditional screenplay written for human actors and a live-action crew, action lines rely heavily on literary metaphor:
+
+```text
+TRADITIONAL HOLLYWOOD SCRIPT FORMAT:
+
+EXT. WASTELAND - DUSK
+
+Marcus trudges through the radioactive mud. The weight of his 
+lost family bears down on his shoulders. He looks toward the 
+distant citadel, feeling a cold shiver of impending doom.
+```
+
+If you feed that paragraph into Runway Gen-3, Kling 1.5, or Midjourney v7, the AI will fail miserably. 
+- It does not know what "the weight of his lost family" looks like.
+- It does not know how to generate "a cold shiver of impending doom."
+- It has no camera framing, no lighting direction, and no motion vectors.
+
+### The Solution: The Visual Action Cue (VAC) Format
+For AI cinema, we developed the **Visual Action Cue (VAC)** hybrid format. It keeps traditional industry dialogue and sluglines for your voice actors (ElevenLabs), but adds structured, bracketed visual directives optimized for direct translation into video diffusion prompts:
+
+```text
+AI-OPTIMIZED SCREENPLAY FORMAT (VAC PROTOCOL):
+
+EXT. ASH WASTELANDS - DUSK
+
+[VAC: WIDE ANAMORPHIC SHOT - 24MM LENS - GOLDEN HOUR OVERCAST.
+Desaturated charcoal earth, drifting embers, low volumetric orange fog.
+CAMERA: Low-angle tracking shot pulling backward along Z-axis at slow walking pace.]
+
+MARCUS (42, weathered, scarred jawline, torn ballistic duster) trudges 
+through deep black mud. His boots sink into the sludge. His breathing is 
+ragged inside his cracked respirator visor.
+
+[VAC: CLOSE-UP - 85MM T1.5 PRIME - SHALLOW DEPTH OF FIELD.
+Tight on Marcus's eyes through the scratched visor. 
+Reflected in the glass: the distant geometric spires of the neon citadel.
+LIGHTING: Cool cyan rim light on jaw, warm tungsten flicker on left temple.
+MOTION: Slow subtle push-in toward left eye, 24fps film cadence.]
+
+MARCUS
+(voice muffled, harsh static)
+Command... if you're hearing this, the perimeter relay is dark. 
+I'm going in cold.
+```
+
+Notice why this format is revolutionary:
+1. **Human Voice Performance:** The dialogue block can be copied directly into ElevenLabs with exact emotional context and parentheticals.
+2. **Zero-Hallucination Video Prompts:** The `[VAC]` block contains all necessary tokens (shot type, focal length, color grade, camera vector, lighting setup) ready to be pasted into Runway Gen-3 or Kling with zero guesswork.
+3. **Consistent Directing:** It forces the screenwriter to think like a director and cinematographer simultaneously.
+
+---
+
+## 5. Exact Master Prompts: 3 Full System Prompts to Copy
+
+To achieve professional results with Claude 3.5 Sonnet, use these three production-tested master prompts.
+
+```
++--------------------------------------------------------------------------+
+|                       MASTER PROMPT 1 OF 3                               |
+|            THE HIGH-CONCEPT PREMISE & 15-BEAT ARCHITECT                  |
++--------------------------------------------------------------------------+
+```
+
+```markdown
+You are an award-winning feature film screenwriting consultant and narrative architect specializing in dramatic cinema and high-concept independent feature films.
+
+Your objective is to help me develop an emotionally resonant, tightly plotted 3-act feature screenplay blueprint that avoids all AI writing cliches, generic tropes, and on-the-nose dialogue.
+
+PROJECT SEED:
+- Genre: [INSERT GENRE, e.g., Neo-Noir Sci-Fi / Psychological Thriller]
+- Logline Core Idea: [INSERT YOUR 1-2 SENTENCE PREMISE]
+- Target Runtime: [e.g., 60 minutes / 35 scenes]
+- Emotional Tone & Inspo: [e.g., Children of Men meets Sicario]
+
+EXECUTE THE FOLLOWING 3 TASKS IN ORDER:
+
+TASK 1: THEMATIC FOUNDATION & CHARACTER MATRIX
+- Define the Protagonist's Internal Wound (The Lie they believe about themselves or the world).
+- Define the External Goal (Tangible objective) vs. Internal Need (Moral truth required for transformation).
+- Define the Antagonist's Thematic Mirror (How the villain embodies the unchecked consequence of the Lie).
+- Formulate a 2-sentence market-ready Logline.
+
+TASK 2: THE 15-BEAT BLAKE SNYDER BEAT SHEET
+Develop the complete 15-beat narrative structure with specific, concrete dramatic actions (NOT vague summaries):
+1. Opening Image
+2. Theme Stated
+3. Set-Up
+4. Catalyst (Inciting Incident)
+5. Debate
+6. Break into Two
+7. B Story
+8. Fun and Games (3 distinct set-pieces)
+9. Midpoint (Define whether false victory or false defeat + the stakes shift)
+10. Bad Guys Close In
+11. All Is Lost (The Whiff of Death)
+12. Dark Night of the Soul
+13. Break into Three
+14. Finale (5-stage climax sequence)
+15. Final Image (Direct visual contrast to Beat 1)
+
+TASK 3: NARRATIVE STRESS-TEST
+Highlight the single weakest beat in this outline and propose two high-stakes narrative twists that challenge the protagonist's moral comfort zone.
+
+RULES:
+- Ban all generic AI cliches ("A journey of self-discovery", "Everything changed that day", "Echoes of the past").
+- Prioritize visceral, physical stakes over abstract ideas.
+```
+
+---
+
+```
++--------------------------------------------------------------------------+
+|                       MASTER PROMPT 2 OF 3                               |
+|              THE DIALOGUE SUBTEXT DOCTOR & SCENE ENGINE                  |
++--------------------------------------------------------------------------+
+```
+
+```markdown
+You are a veteran Hollywood dialogue doctor and script supervisor known for razor-sharp subtext, psychological tension, and gritty authenticity (in the style of Taylor Sheridan, Tony Gilroy, and the Coen Brothers).
+
+Your task is to write Scene [INSERT SCENE NUMBER] from our locked outline in industry-standard screenplay format, incorporating the VAC (Visual Action Cue) system for AI video generation.
+
+SCENE CONTEXT:
+- Setting: [e.g., EXT. SCRAP YARD - NIGHT - RAIN]
+- Characters Present: [e.g., MARCUS and ELENA]
+- Scene Objective: [What Character A wants vs What Character B wants]
+- Emotional Charge Shift: [e.g., Starts Suspicious (+), Ends Betrayed (-)]
+- Unstated Subtext: [What both characters know but refuse to say aloud]
+
+STRICT WRITING RULES:
+1. BAN ON-THE-NOSE EXPOSITION: No character may explain the plot, state their feelings directly, or use melodramatic declarations. 
+2. DEFENSIVE SPEECH: Characters must evade questions, use sarcasm, interrupt, speak through silence, and deploy physical micro-actions to deflect emotional vulnerability.
+3. WEAPONIZED ACTION LINES: Action descriptions must convey psychological mood through observable physical behavior (e.g., tapping a wedding ring against glass, avoiding eye contact, swallowing dryly).
+4. VAC INTEGRATION: Include a [VAC: ...] block before major visual shifts specifying: Camera Shot Type, Lens/Focal Length, Camera Motion Vector, Lighting Atmosphere, and Render Cadence.
+
+Now, write the complete scene.
+```
+
+---
+
+```
++--------------------------------------------------------------------------+
+|                       MASTER PROMPT 3 OF 3                               |
+|            THE AI SHOT-LIST & DIFFUSION PROMPT TRANSCRIBER               |
++--------------------------------------------------------------------------+
+```
+
+```markdown
+You are an AI Cinematographer and Visual Prompt Engineer specializing in translating cinematic screenplays into production-ready prompts for Runway Gen-3 Alpha, Kling 1.5, and Midjourney v7.
+
+Analyze the attached screenplay scene below and transcribe it into an execution-ready AI Shot List.
+
+FOR EACH SHOT IN THE SCENE, PROVIDE:
+1. Shot ID & Description: (e.g., Shot 04B: Marcus checks weapon slide).
+2. Shot Type & Lens: (e.g., Medium Close-Up, 50mm Anamorphic, f/2.0).
+3. Primary Video Prompt (Optimized for Runway Gen-3 / Kling):
+   - Spatial Subject Description (clothing, texture, physical posture).
+   - Environment & Atmosphere (volumetric haze, particles, background elements).
+   - Key Lighting Scheme (key/fill/rim color temperatures, lighting direction).
+   - Camera Motion Vector (e.g., "Slow mechanical dolly push-in along Z-axis, locked pan, 24fps motion blur").
+4. Negative Prompt Constraints: (e.g., "fast pan, morphing, cartoon, saturated colors, digital sharpen").
+5. ElevenLabs Audio Reference: (The exact dialogue line + audio pacing notes for voice cloning).
+
+SCREENPLAY SCENE TO TRANSCRIBE:
+[PASTE YOUR WRITTEN SCENE HERE]
+```
+
+---
+
+## 6. Real Project Walkthrough: How a Student Wrote a 35-Page Dystopian Script in 2 Days
+
+To understand how this pipeline operates in the real world, let's examine a case study from one of our filmmakers inside the *AI Filmmaking Pro* community, **Marcus Vance**, who developed his viral 38-minute YouTube sci-fi film *The Rust Protocol*.
+
+```
++--------------------------------------------------------------------------+
+|                  MARCUS VANCE'S 48-HOUR SCRIPT SPRINT                    |
+|                                                                          |
+|  DAY 1 (4 HOURS):                                                        |
+|  - Logline stress-tested through Claude Master Prompt 1.                  |
+|  - 15-Beat sheet refined; identified weak Midpoint and rebuilt climax.   |
+|  - Created Character Bible (distinct vocabulary banks for 3 characters). |
+|                                                                          |
+|  DAY 2 (6 HOURS):                                                        |
+|  - Generated 35 scenes across 10 batched Claude prompts.                 |
+|  - Filtered dialogue through Dialogue Subtext Doctor.                    |
+|  - Transcribed 142 visual prompts into Notion using Prompt 3.            |
+|                                                                          |
+|  RESULT: 35-page production script ready for Midjourney/Runway.          |
++--------------------------------------------------------------------------+
+```
+
+### The Breakthrough: Character Vocabulary Banks
+Marcus's initial dialogue felt uniform—both the military officer and the street scavenger sounded like college-educated AI assistants.
+
+To solve this, he loaded a **Vocabulary Constraint Bank** into Claude's system prompt before writing scene pages:
+- **Major Kincaid (The Officer):** Banned all emotional adjectives. Restricted sentences to under 10 words. Heavy use of procedural military syntax ("affirmed", "negative", "status report", "expendable").
+- **Lyra (The Scavenger):** Rapid-fire, defensive speech. Frequent rhetorical questions. Heavy use of physical similes drawn from machinery and engine parts ("sounds like a blown gasket", "running on borrowed coolant").
+
+The resulting dialogue had distinct rhythmic counterpoint. When the two characters argued, viewers could immediately tell who was speaking without looking at character names—a hallmark of professional screenwriting.
+
+---
+
+## 7. Next Step: Accelerate Your Production Inside AI Filmmaking Pro
+
+Writing your script is the first—and most vital—domino in the AI filmmaking pipeline. Once your screenplay is locked and formatted with Visual Action Cues, you are ready to move into:
+1. Generating seed-locked character concept plates.
+2. Voicing dialogue with multi-take emotional nuance in ElevenLabs.
+3. Directing camera motion in Runway Gen-3 and Kling 1.5.
+4. Assembling your final cut and soundscape in DaVinci Resolve.
+
+> 💡 **Get Started for Free:** Grab our pre-formatted **[Claude 3.5 Screenplay Beat Sheet on the Templates page](/templates)** to start outlining your 15-beat narrative without starting from scratch.
+
+In **Module 3 ("Ideas & Script Generation")** of the comprehensive [AI Filmmaking Pro masterclass](/), we provide:
+- **The Complete Claude 3.5 Prompt Stack:** 12 specialized system prompts for beat sheets, scene matrices, dialogue polishing, and automated shot-listing.
+- **The Notion Script-to-Screen Production Engine:** The exact project template our students use to track characters, shots, audio stems, and render status in one synchronized dashboard.
+- **Over 10 Hours of Step-by-Step Video Modules:** Guiding you from a blank page to a finished, monetizable 1-hour feature film on YouTube.
+
+The entire course is available for a single **one-time investment of $79**, with lifetime access, free future curriculum updates, and access to our private community of independent AI directors.
+
+👉 **[Enroll in AI Filmmaking Pro Today & Master the Complete Pipeline](/)**
+
+---
+
+## 8. Frequently Asked Questions (FAQ)
+
+### How do I stop Claude 3.5 from writing cheesy, melodramatic dialogue?
+Melodramatic dialogue occurs when an AI is given narrative context without behavioral constraints. To cure this:
+1. Instruct Claude that characters are actively trying to **hide their true feelings** from one another.
+2. Ban all direct emotional labels ("I feel sad", "I'm terrified", "You broke my heart").
+3. Force characters to use **displacement activities**—talking about mundane physical objects (a leaky radiator, a broken watch, the cold coffee) while negotiating life-and-death emotional stakes.
+
+### Can Claude 3.5 write a full 90-page feature script in a single prompt?
+Never attempt this. Generating an entire feature film script in one prompt exceeds the model's single-turn generation limits and causes the AI to condense narrative pacing into shallow synopses. Always use the phased approach: outline the 15 beats first, construct the 45-scene breakdown, and write scenes in tight batches of 3 to 5 pages per prompt.
+
+### Who owns the copyright to a movie script generated with Claude 3.5?
+Under current international copyright frameworks and US Copyright Office guidelines, raw synthetic text generated autonomously by an AI tool without human intervention cannot be copyrighted. However, when an author designs the original narrative concept, structures the beat sheets, iteratively guides dialogue revisions, curates every scene, and compiles the elements into an original literary screenplay, the human creator holds copyright over the compiled, directed work.
+
+### How does an AI-targeted screenplay differ from a traditional Hollywood spec script?
+A traditional Hollywood spec script is written for human department heads (cinematographer, gaffer, actors) and intentionally avoids technical camera directions so directors have creative freedom. In AI filmmaking, **you are the director, cinematographer, and gaffer**. An AI screenplay embeds **Visual Action Cues (VAC)** directly into the scene formatting, detailing focal length, key lighting, camera trajectory, and motion physics so that lines can be translated seamlessly into prompts for diffusion models like Runway Gen-3, Kling, and LTX Studio.
+

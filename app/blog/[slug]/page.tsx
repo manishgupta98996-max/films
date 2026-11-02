@@ -64,7 +64,11 @@ export default async function BlogPostPage({ params }: PageProps) {
     datePublished: post.meta.date,
     dateModified: post.meta.updated,
     author: post.meta.author || INSTRUCTOR.name,
-    imageUrl: post.meta.cover ? `${SITE_URL}${post.meta.cover}` : `${SITE_URL}/og-default.png`,
+    imageUrl: post.meta.cover
+      ? post.meta.cover.startsWith("http")
+        ? post.meta.cover
+        : `${SITE_URL}${post.meta.cover}`
+      : `${SITE_URL}/og-default.png`,
   });
 
   // BreadcrumbList JSON-LD

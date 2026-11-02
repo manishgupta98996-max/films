@@ -126,6 +126,24 @@ export default function ShowcaseGallery({ demos }: ShowcaseGalleryProps) {
           <p className="text-base sm:text-xl text-neutral-600 font-medium max-w-3xl mx-auto leading-relaxed [text-wrap:balance]">
             Original movies, episode pilots, and scene tests produced by creators using the AI Filmmaking Pro pipeline.
           </p>
+
+          <p className="text-xs sm:text-sm text-neutral-500 font-medium max-w-2xl mx-auto mt-4 leading-relaxed">
+            Curious about the technical workflow behind these films? Read our{" "}
+            <Link
+              href="/guide/ai-filmmaking-workflow-idea-to-final-cut"
+              className="text-[#D64700] hover:text-[#FF5B00] font-bold underline transition-colors"
+            >
+              End-to-End AI Production Guide
+            </Link>{" "}
+            or grab our free{" "}
+            <Link
+              href="/templates"
+              className="text-[#D64700] hover:text-[#FF5B00] font-bold underline transition-colors"
+            >
+              Director Templates
+            </Link>
+            .
+          </p>
         </header>
 
         {/* ================================================================= */}
