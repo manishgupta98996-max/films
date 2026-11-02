@@ -63,7 +63,7 @@ export default function PrivacyPage() {
 
           <section className="space-y-3 pt-6 border-t border-light-muted/15">
             <h2 className="text-xl font-bold text-zinc-900">
-              3. Cookies &amp; Web Beacons
+              3. Analytics &amp; Cookies
             </h2>
             <p>
               Cookies are small text files placed on your device by websites that you visit. We use cookies to improve your browsing experience, store preferences, deliver essential session functionality, and understand how visitors interact with our content.
@@ -78,62 +78,67 @@ export default function PrivacyPage() {
               4. Third-Party Advertising &amp; Google AdSense
             </h2>
             <p>
-              We may display third-party advertisements on {SITE_NAME} via advertising partners, including <strong>Google AdSense</strong>. Third-party vendors, including Google, use cookies to serve advertisements based on a user&apos;s prior visits to this website or other websites across the Internet.
-            </p>
-            <p>
-              Google&apos;s use of advertising cookies (such as DoubleClick DART cookies) enables it and its partners to serve targeted ads to our visitors based on their visits to our site and/or other sites on the World Wide Web.
-            </p>
-            <p>
-              Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons within their respective advertisements and links that appear on {SITE_NAME}. These technologies are sent directly to users&apos; browsers, automatically receiving your IP address when this happens. These mechanisms are used to measure the effectiveness of advertising campaigns and personalize the advertising content you see.
-            </p>
-            <p className="text-sm text-zinc-600 italic">
-              Note: {SITE_NAME} has no direct access to or control over cookies that are used by third-party advertisers.
-            </p>
-          </section>
-
-          <section className="space-y-3 pt-6 border-t border-light-muted/15">
-            <h2 className="text-xl font-bold text-zinc-900">
-              5. User Cookie Opt-Out Instructions
-            </h2>
-            <p>
-              You have the right to control and opt out of personalized advertising at any time. You can choose to opt out of personalized Google advertising and manage your preferences through the following official channels:
+              We may use third-party advertising companies, including Google, to serve ads when you visit our website. These companies may use cookies, including the DoubleClick DART cookie, to serve ads to you based on your visits to this and other websites across the Internet.
             </p>
             <ul className="list-disc pl-5 space-y-2 mt-2">
               <li>
-                <strong>Google Ads Settings:</strong> You can opt out of personalized advertising directly by visiting{" "}
+                <strong>DoubleClick DART Cookie:</strong> Google&apos;s use of the DART cookie enables it and its partners to serve ads based on your visit to our site and other sites on the Internet.
+              </li>
+              <li>
+                <strong>User Opt-Out:</strong> You may opt out of the use of the DART cookie for interest-based advertising by visiting the{" "}
                 <a
-                  href="https://www.google.com/settings/ads"
+                  href="https://policies.google.com/technologies/ads"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-amber-800 font-semibold underline hover:text-amber-900 break-words"
                 >
-                  https://www.google.com/settings/ads
+                  Google Ad and Content Network Privacy Policy
                 </a>.
               </li>
               <li>
-                <strong>Network Advertising Initiative &amp; AboutAds:</strong> You can opt out of third-party vendor cookies for personalized advertising by visiting the Digital Advertising Alliance&apos;s Consumer Choice Page at{" "}
+                Users can also opt out of third-party vendor cookies for personalized advertising by visiting{" "}
                 <a
                   href="https://www.aboutads.info/choices/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-amber-800 font-semibold underline hover:text-amber-900 break-words"
                 >
-                  https://www.aboutads.info/choices/
+                  AboutAds Choices
                 </a>{" "}
-                or the Network Advertising Initiative (NAI) opt-out tool at{" "}
+                or the{" "}
                 <a
-                  href="https://optout.networkadvertising.org/"
+                  href="https://www.networkadvertising.org/choices/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-amber-800 font-semibold underline hover:text-amber-900 break-words"
                 >
-                  https://optout.networkadvertising.org/
+                  Network Advertising Initiative
                 </a>.
               </li>
-              <li>
-                <strong>Browser Cookie Controls:</strong> You can configure your web browser (Chrome, Safari, Edge, Firefox) to block third-party cookies or notify you whenever a cookie is set. Consult your specific browser&apos;s help menu to manage stored cookies.
-              </li>
             </ul>
+            <p className="text-sm text-zinc-600 italic pt-1">
+              Note: {SITE_NAME} has no direct access to or control over cookies that are used by third-party advertisers.
+            </p>
+          </section>
+
+          <section className="space-y-3 pt-6 border-t border-light-muted/15">
+            <h2 className="text-xl font-bold text-zinc-900">
+              5. Browser Cookie Controls &amp; Managing Preferences
+            </h2>
+            <p>
+              In addition to opting out of personalized advertising networks, you can configure your web browser (Chrome, Safari, Edge, Firefox) to block third-party cookies or notify you whenever a cookie is set. Consult your specific browser&apos;s help menu or settings panel to manage or clear stored cookies at any time.
+            </p>
+            <p>
+              For additional controls regarding Google ad personalization across devices, visit{" "}
+              <a
+                href="https://www.google.com/settings/ads"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-amber-800 font-semibold underline hover:text-amber-900 break-words"
+              >
+                https://www.google.com/settings/ads
+              </a>.
+            </p>
           </section>
 
           <section className="space-y-3 pt-6 border-t border-light-muted/15">
